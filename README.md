@@ -8,15 +8,15 @@ FirstPR AI uses [Ollama](https://ollama.com/) for local language-model inference
 
 FirstPR AI ships with five focused skill guides:
 
-| 5 Skills | Purpose |
+| Skill | Purpose |
 |---|---|
-| **Issue Analyzer** | Break down an issue and help identify what needs investigation. |
+| **Issue Analyzer** | Break down an issue and identify what needs investigation. |
 | **Codebase Explorer** | Guide a contributor through understanding an unfamiliar codebase. |
-| **Test Planner** | Help think through useful tests before and after a change. |
+| **Test Planner** | Help plan useful tests before and after a change. |
 | **PR Mentor** | Help prepare and review a contribution workflow. |
-| **Contribution Safety Checker** | Encourage safety checks before making or submitting changes. |
+| **Contribution Safety Checker** | Encourage safety checks before making or submitting a change. |
 
-The app sends prompts to the Ollama server configured in `app.py`. With Ollama running locally, you do not need a cloud AI API key.
+The app sends prompts to the Ollama endpoint configured in `app.py`. With Ollama running locally, you do not need a cloud AI API key.
 
 ## Quick start
 
@@ -24,7 +24,7 @@ The app sends prompts to the Ollama server configured in `app.py`. With Ollama r
 
 - Python 3.10 or newer
 - [Ollama](https://ollama.com/download)
-- Git (optional, but useful for contributing)
+- Git (recommended)
 
 ### 2. Clone the repository
 
@@ -40,28 +40,28 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks activation, you can run the commands below using `.venv\Scripts\python.exe` directly instead.
+If PowerShell blocks activation, use `.venv\Scripts\python.exe` directly instead.
 
-### 4. Install Python dependencies
+### 4. Install dependencies
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-### 5. Download and start a local model
+### 5. Download and start the local model
 
-The current setup is configured to use `llama3.2:3b`.
+The app is currently configured to use `llama3.2:3b`.
 
 ```powershell
 ollama pull llama3.2:3b
 ollama serve
 ```
 
-If Ollama is already running in the background, you do not need to start `ollama serve` again. Keep Ollama running while you use the app.
+If Ollama is already running in the background, you do not need to start `ollama serve` again. Keep Ollama running while using the app.
 
-### 6. Launch FirstPR AI
+### 6. Launch the app
 
-In a second PowerShell terminal, from the project folder with the virtual environment activated:
+In a second terminal, from the project folder with the virtual environment activated:
 
 ```powershell
 python app.py
@@ -81,37 +81,38 @@ FirstPR-AI/
 │   ├── test-planner/SKILL.md
 │   ├── pr-mentor/SKILL.md
 │   └── contribution-safety-checker/SKILL.md
-├── .github/
-│   └── workflows/
-│       └── ci.yml
+├── tests/
+│   └── test_app.py
+├── .github/workflows/ci.yml
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
 ```
 
-## Privacy and limitations
+## Tests and development checks
 
-- The app is designed to use the Ollama endpoint configured in `app.py`; check that configuration before using it with sensitive information.
-- Model output can be incorrect or incomplete. Review suggestions and verify commands before running them.
-- Do not paste access tokens, passwords, private keys, or confidential project data into prompts.
-- The GitHub repository contains the application and skill guides; it does not include your local model files or Python virtual environment.
-
-## Development checks
-
-Run a Python syntax check locally:
+Run these commands from the repository root:
 
 ```powershell
-python -m compileall -q app.py
+python -m compileall -q app.py tests
+python -m unittest discover -s tests -v
 ```
 
-A GitHub Actions workflow runs dependency installation and a syntax check on pushes and pull requests to `main`. It does not test model quality or require an Ollama server.
+GitHub Actions runs the syntax check and regression tests on pushes and pull requests to `main`. The tests mock the Ollama connection, so they do not download a model or require a running Ollama server. The workflow does not evaluate model answer quality.
+
+## Privacy and limitations
+
+- The app is designed to use the Ollama endpoint configured in `app.py`; review that configuration before using sensitive information.
+- Model output can be incorrect or incomplete. Review suggestions and verify commands before running them.
+- Never paste access tokens, passwords, private keys, or confidential project data into prompts.
+- The repository does not include local model files or your Python virtual environment.
 
 ## Roadmap
 
-- Add automated tests for issue-analysis behavior.
-- Add screenshots and a short demo once the UI capture is available.
-- Improve error handling for an unavailable local model.
+- Add a configurable model and Ollama endpoint.
+- Add screenshots and a short demo.
 - Expand beginner-friendly contribution examples.
+- Improve skill guidance using real beginner feedback.
 
 ## Contributing
 
