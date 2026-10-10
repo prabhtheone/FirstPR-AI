@@ -27,13 +27,13 @@ Choose a skill from the interface and provide the relevant issue or project cont
 ## 🖼️ Screenshots
 
 ### Main interface
-![FirstPR AI main interface](screenshots/main-interface.png)
+![FirstPR AI main interface](screenshots/main-interface.png.png)
 
 ### Available agent skills
-![FirstPR AI skill selector](screenshots/agent-skills.png)
+![FirstPR AI skill selector](screenshots/agent-skills.png.png)
 
 ### App settings
-![FirstPR AI settings](screenshots/settings.png)
+![FirstPR AI settings](screenshots/settings.png.png)
 
 ## 🚀 Run it on your computer
 
@@ -141,9 +141,9 @@ FirstPR-AI/
 ├── tests/
 │   └── test_app.py
 ├── screenshots/
-│   ├── main-interface.png
-│   ├── agent-skills.png
-│   └── settings.png
+│   ├── main-interface.png.png
+│   ├── agent-skills.png.png
+│   └── settings.png.png
 ├── .github/workflows/ci.yml
 ├── CONTRIBUTING.md
 ├── LICENSE
