@@ -8,7 +8,7 @@ FirstPR AI uses [Ollama](https://ollama.com/) for local language-model inference
 
 FirstPR AI ships with five focused skill guides:
 
-| Skill | Purpose |
+| 5 Skills | Purpose |
 |---|---|
 | **Issue Analyzer** | Break down an issue and help identify what needs investigation. |
 | **Codebase Explorer** | Guide a contributor through understanding an unfamiliar codebase. |
