@@ -13,7 +13,7 @@ class FirstPRAITests(unittest.TestCase):
         with patch("app.requests.post") as post:
             result = app.analyze_issue("   ", "Issue Analyzer")
 
-        self.assertIn("paste a GitHub issue", result.lower())
+        self.assertIn("paste a github issue", result.lower())
         post.assert_not_called()
 
     def test_unknown_skill_returns_helpful_error(self):
