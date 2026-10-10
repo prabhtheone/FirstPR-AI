@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  syntax-check:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -28,4 +28,7 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Check Python syntax
-        run: python -m compileall -q app.py
+        run: python -m compileall -q app.py tests
+
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
