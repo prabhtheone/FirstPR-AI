@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="FirstPR AI is a local-first AI mentor that helps first-time open-source contributors understand issues, explore codebases, plan tests, and prepare pull requests.">
+<title>FirstPR AI — Your local open-source mentor</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2c;--muted:#a9b5ca;--text:#f4f7ff;--accent:#8be9c3;--line:#26324a}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at 75% 0%,#1c3550 0,transparent 42%),var(--bg);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:26px 22px 70px}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:800;letter-spacing:-.04em;font-size:1.15rem}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 12px;color:var(--muted);font-size:.84rem}.hero{padding:88px 0 66px;max-width:780px}.eyebrow{color:var(--accent);font-weight:700;font-size:.83rem;letter-spacing:.13em;text-transform:uppercase}h1{font-size:clamp(2.7rem,7vw,5.3rem);line-height:1.02;letter-spacing:-.065em;margin:18px 0 22px}h1 span{color:var(--accent)}.lead{color:var(--muted);font-size:1.15rem;max-width:680px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{display:inline-block;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:750;background:var(--accent);color:#07130f}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}.note{margin-top:18px;color:var(--muted);font-size:.9rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:22px 0 56px}.card{background:linear-gradient(150deg,#151f34,#101727);border:1px solid var(--line);border-radius:18px;padding:21px}.card .icon{font-size:1.5rem}.card h3{margin:10px 0 5px}.card p{margin:0;color:var(--muted);font-size:.95rem}.section{padding:18px 0 28px}h2{font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-.04em;margin-bottom:8px}.steps{counter-reset:step;display:grid;gap:12px}.step{display:flex;gap:15px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#101727}.num{flex:0 0 34px;height:34px;border-radius:10px;background:#203b3a;color:var(--accent);display:grid;place-items:center;font-weight:800}.step p{margin:2px 0 0;color:var(--muted)}code{background:#1b263a;padding:3px 6px;border-radius:6px;color:#d8fbe9}.code{background:#070b14;border:1px solid var(--line);border-radius:14px;padding:18px;overflow:auto;color:#d8fbe9;font: .9rem/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}.callout{border:1px solid #31544e;background:#102522;border-radius:16px;padding:20px;margin:24px 0}.callout strong{color:var(--accent)}footer{border-top:1px solid var(--line);margin-top:48px;padding-top:22px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}@media(max-width:600px){.hero{padding-top:60px}.nav{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body><main class="wrap">
+<nav class="nav"><div class="brand">✳ FirstPR AI</div><div class="pill">Open source · Local-first AI</div></nav>
+<section class="hero"><div class="eyebrow">Your first contribution, with a mentor</div><h1>Make your first PR<br><span>with confidence.</span></h1><p class="lead">A beginner-friendly AI mentor to help you understand GitHub issues, navigate unfamiliar codebases, plan tests, prepare pull requests, and think through contribution safety — powered by a model running on your own computer.</p><div class="actions"><a class="btn" href="https://github.com/prabhtheone/FirstPR-AI#-run-it-on-your-computer">Get started locally ↗</a><a class="btn secondary" href="https://github.com/prabhtheone/FirstPR-AI">Explore on GitHub ↗</a></div><p class="note">This website is the public project page. The AI interface currently runs locally; this page does not send your issue to a hosted AI service.</p></section>
+<section><div class="eyebrow">Five focused skills</div><div class="grid">
+<article class="card"><div class="icon">🧩</div><h3>Issue Analyzer</h3><p>Turn a confusing issue into a clear problem, requirements, and investigation plan.</p></article>
+<article class="card"><div class="icon">🧭</div><h3>Codebase Explorer</h3><p>Plan where to look and how to understand an unfamiliar repository.</p></article>
+<article class="card"><div class="icon">🧪</div><h3>Test Planner</h3><p>Identify useful test cases before and after making a change.</p></article>
+<article class="card"><div class="icon">🔀</div><h3>PR Mentor</h3><p>Organize a clear, reviewable contribution workflow.</p></article>
+<article class="card"><div class="icon">🛡️</div><h3>Safety Checker</h3><p>Pause and review risky commands or contribution steps before acting.</p></article>
+</div></section>
+<section class="section"><div class="eyebrow">Run it on your machine</div><h2>Your model. Your machine.</h2><p class="lead">FirstPR AI uses Python, Gradio, and Ollama. After you download the model once, you can run the AI locally without a cloud AI API key.</p>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><strong>Install the prerequisites</strong><p>Install Python 3.10+, Git, and <a href="https://ollama.com/download">Ollama</a>.</p></div></div>
+<div class="step"><div class="num">2</div><div><strong>Clone and install</strong><p>Run these commands in PowerShell.</p></div></div>
+<div class="step"><div class="num">3</div><div><strong>Download the model and launch</strong><p>Open the local interface in your browser.</p></div></div></div>
+<pre class="code">git clone https://github.com/prabhtheone/FirstPR-AI.git
+cd FirstPR-AI
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+ollama pull llama3.2:3b
+python app.py</pre>
+<p>Then open <code>http://127.0.0.1:7860</code>. Keep Ollama running while using the app. If PowerShell blocks virtual-environment activation, use <code>.venv\Scripts\python.exe -m pip install -r requirements.txt</code> and <code>.venv\Scripts\python.exe app.py</code>.</p>
+<div class="callout"><strong>Privacy by design</strong><br>In the current local app, prompts are sent to the Ollama service on your computer. Review AI output before acting on it, and never paste passwords, tokens, private keys, or confidential information.</div>
+<div class="actions"><a class="btn" href="https://github.com/prabhtheone/FirstPR-AI#-run-it-on-your-computer">Full setup guide ↗</a><a class="btn secondary" href="https://github.com/prabhtheone/FirstPR-AI/blob/main/CONTRIBUTING.md">Contribute ↗</a></div>
+</section>
+<footer><span>✳ FirstPR AI · Built for first-time open-source contributors</span><span><a href="https://github.com/prabhtheone/FirstPR-AI">GitHub repository</a> · MIT License</span></footer>
+</main></body></html>
