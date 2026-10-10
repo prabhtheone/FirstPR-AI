@@ -1,5 +1,7 @@
 # 🤖 FirstPR AI
 
+🌐 **Project website:** [firstpr-ai.vercel.app](https://firstpr-ai.vercel.app) · 🧑‍💻 **Run the AI locally:** follow the setup below.
+
 > **Your local AI mentor for open-source contributions.** Understand issues, explore unfamiliar codebases, plan tests, prepare pull requests, and review contribution safety — with a local Ollama model.
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
