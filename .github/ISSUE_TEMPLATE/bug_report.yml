@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible problem in FirstPR AI
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please do not include passwords, API keys, private issue text, or other sensitive information."
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem clearly.
+      placeholder: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: List the steps needed to reproduce the issue.
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "e.g. 3.12.10"
+  - type: input
+    id: ollama
+    attributes:
+      label: Ollama and model version
+      placeholder: "e.g. Ollama version and llama3.2:3b"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant error message
+      description: Remove secrets and private data before sharing.
+      render: text
