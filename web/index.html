@@ -13,7 +13,55 @@
 </head>
 <body><main class="wrap">
 <nav class="nav"><div class="brand">✳ FirstPR AI</div><div class="pill">Open source · Local-first AI</div></nav>
-<section class="hero"><div class="eyebrow">Your first contribution, with a mentor</div><h1>Make your first PR<br><span>with confidence.</span></h1><p class="lead">A beginner-friendly AI mentor to help you understand GitHub issues, navigate unfamiliar codebases, plan tests, prepare pull requests, and think through contribution safety — powered by a model running on your own computer.</p><div class="actions"><a class="btn" href="https://github.com/prabhtheone/FirstPR-AI#-run-it-on-your-computer">Get started locally ↗</a><a class="btn secondary" href="https://github.com/prabhtheone/FirstPR-AI">Explore on GitHub ↗</a></div><p class="note">This website is the public project page. The AI interface currently runs locally; this page does not send your issue to a hosted AI service.</p></section>
+<section class="hero"><div class="eyebrow">Your first contribution, with a mentor</div><h1>Make your first PR<br><span>with confidence.</span></h1><p class="lead">A beginner-friendly AI mentor to help you understand GitHub issues, navigate unfamiliar codebases, plan tests, prepare pull requests, and think through contribution safety — powered by a model running on your own computer.</p><div class="actions"><a class="btn" href="https://github.com/prabhtheone/FirstPR-AI#-run-it-on-your-computer">Get started locally ↗</a><a class="btn secondary" href="https://github.com/prabhtheone/FirstPR-AI">Explore on GitHub ↗</a></div><p class="note">Try the hosted AI mentor below. Local Ollama setup remains available if you prefer running a model on your own computer.</p></section>
+
+<section class="section" id="try-ai">
+  <div class="eyebrow">Try FirstPR AI online</div><h2>Your open-source mentor, in the browser.</h2>
+  <p class="lead">Choose a skill, paste your question or GitHub issue, and get guidance from the hosted AI model. Don’t include passwords, API keys, or private information.</p>
+  <div class="card" style="max-width:820px">
+    <label for="skill" style="display:block;font-weight:700;margin-bottom:8px">Choose an Agent Skill</label>
+    <select id="skill" style="width:100%;padding:12px;border-radius:10px;background:#0b1020;color:#f4f7ff;border:1px solid #26324a;margin-bottom:16px">
+      <option>Issue Analyzer</option><option>Codebase Explorer</option><option>Test Planner</option><option>PR Mentor</option><option>Contribution Safety Checker</option>
+    </select>
+    <label for="prompt" style="display:block;font-weight:700;margin-bottom:8px">Your prompt</label>
+    <textarea id="prompt" maxlength="20000" rows="8" placeholder="Paste a GitHub issue or ask how to approach your first contribution..." style="width:100%;resize:vertical;padding:14px;border-radius:10px;background:#0b1020;color:#f4f7ff;border:1px solid #26324a;font:inherit"></textarea>
+    <div class="actions"><button class="btn" id="ask" type="button" style="border:0;cursor:pointer;font:inherit;font-weight:750">Ask FirstPR AI ↗</button><span id="status" class="note" role="status" aria-live="polite"></span></div>
+    <div id="answer" class="code" style="display:none;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:18px;max-height:600px;overflow:auto"></div>
+    <p class="note">Cloud mode sends your prompt to Groq to generate a response. Prompts are not intentionally stored by this site; the provider may process requests under its own terms. Review all suggestions before using them.</p>
+  </div>
+</section>
+<script>
+(() => {
+  const button = document.getElementById('ask');
+  const promptBox = document.getElementById('prompt');
+  const skillBox = document.getElementById('skill');
+  const status = document.getElementById('status');
+  const answer = document.getElementById('answer');
+  button.addEventListener('click', async () => {
+    const prompt = promptBox.value.trim();
+    if (!prompt) { status.textContent = 'Enter a prompt first.'; promptBox.focus(); return; }
+    button.disabled = true; button.style.opacity = '.65';
+    status.textContent = 'Thinking… this may take a few seconds.';
+    answer.style.display = 'none'; answer.textContent = '';
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({prompt, skill: skillBox.value})
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'The request failed. Please try again.');
+      answer.textContent = data.answer;
+      answer.style.display = 'block';
+      status.textContent = 'Answered by ' + (data.model || 'cloud AI') + ' · ' + data.skill;
+    } catch (error) {
+      status.textContent = error.message || 'Could not reach the AI service.';
+    } finally {
+      button.disabled = false; button.style.opacity = '1';
+    }
+  });
+})();
+</script>
+
 <section><div class="eyebrow">Five focused skills</div><div class="grid">
 <article class="card"><div class="icon">🧩</div><h3>Issue Analyzer</h3><p>Turn a confusing issue into a clear problem, requirements, and investigation plan.</p></article>
 <article class="card"><div class="icon">🧭</div><h3>Codebase Explorer</h3><p>Plan where to look and how to understand an unfamiliar repository.</p></article>
@@ -21,7 +69,7 @@
 <article class="card"><div class="icon">🔀</div><h3>PR Mentor</h3><p>Organize a clear, reviewable contribution workflow.</p></article>
 <article class="card"><div class="icon">🛡️</div><h3>Safety Checker</h3><p>Pause and review risky commands or contribution steps before acting.</p></article>
 </div></section>
-<section class="section"><div class="eyebrow">Run it on your machine</div><h2>Your model. Your machine.</h2><p class="lead">FirstPR AI uses Python, Gradio, and Ollama. After you download the model once, you can run the AI locally without a cloud AI API key.</p>
+<section class="section"><div class="eyebrow">Run it on your machine</div><h2>Choose cloud AI or your own local model.</h2><p class="lead">The hosted demo uses a cloud AI endpoint. You can still run FirstPR AI locally with Python, Gradio, and Ollama; local mode does not need a cloud API key.</p>
 <div class="steps">
 <div class="step"><div class="num">1</div><div><strong>Install the prerequisites</strong><p>Install Python 3.10+, Git, and <a href="https://ollama.com/download">Ollama</a>.</p></div></div>
 <div class="step"><div class="num">2</div><div><strong>Clone and install</strong><p>Run these commands in PowerShell.</p></div></div>
@@ -34,7 +82,7 @@ python -m pip install -r requirements.txt
 ollama pull llama3.2:3b
 python app.py</pre>
 <p>Then open <code>http://127.0.0.1:7860</code>. Keep Ollama running while using the app. If PowerShell blocks virtual-environment activation, use <code>.venv\Scripts\python.exe -m pip install -r requirements.txt</code> and <code>.venv\Scripts\python.exe app.py</code>.</p>
-<div class="callout"><strong>Privacy by design</strong><br>In the current local app, prompts are sent to the Ollama service on your computer. Review AI output before acting on it, and never paste passwords, tokens, private keys, or confidential information.</div>
+<div class="callout"><strong>Privacy note</strong><br>Cloud mode sends prompts to the configured AI provider for processing. For sensitive or confidential material, use the local Ollama app instead. Never paste passwords, tokens, or private keys.</div>
 <div class="actions"><a class="btn" href="https://github.com/prabhtheone/FirstPR-AI#-run-it-on-your-computer">Full setup guide ↗</a><a class="btn secondary" href="https://github.com/prabhtheone/FirstPR-AI/blob/main/CONTRIBUTING.md">Contribute ↗</a></div>
 </section>
 <footer><span>✳ FirstPR AI · Built for first-time open-source contributors</span><span><a href="https://github.com/prabhtheone/FirstPR-AI">GitHub repository</a> · MIT License</span></footer>
