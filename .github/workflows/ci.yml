@@ -28,7 +28,7 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Check Python syntax
-        run: python -m compileall -q app.py tests
+        run: python -m compileall -q app.py skill_registry.py web/api tests
 
       - name: Run regression tests
         run: python -m unittest discover -s tests -v
