@@ -74,7 +74,7 @@ class handler(BaseHTTPRequestHandler):
         if len(prompt) > MAX_PROMPT_LENGTH:
             self._send(413, {"error": "Please shorten your prompt to 20,000 characters or fewer."})
             return
-        if skill not in SKILL_FOLDERS:
+        if not isinstance(skill, str) or skill not in SKILL_FOLDERS:
             self._send(400, {"error": "Choose a valid FirstPR AI skill."})
             return
 
@@ -147,12 +147,13 @@ class handler(BaseHTTPRequestHandler):
             self._send(502, {"error": "Could not reach the cloud AI service. Please try again shortly."})
             return
 
-        answer = (
-            provider_result.get("choices", [{}])[0]
-            .get("message", {})
-            .get("content", "")
-            .strip()
-        )
+        try:
+            answer = (
+                provider_result["choices"][0]["message"]["content"].strip()
+            )
+        except (AttributeError, IndexError, KeyError, TypeError):
+            answer = ""
+
         if not answer:
             self._send(502, {"error": "The AI provider returned an empty answer. Please try again."})
             return
