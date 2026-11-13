@@ -16,6 +16,9 @@ SKILL_FOLDERS = {
 
 def load_skill(skill_name):
     """Load a skill's Markdown instructions and return (content, error)."""
+    if not isinstance(skill_name, str):
+        return None, "Unknown skill selected. Please select a valid skill."
+
     folder = SKILL_FOLDERS.get(skill_name)
     if folder is None:
         return None, "Unknown skill selected. Please select a valid skill."
