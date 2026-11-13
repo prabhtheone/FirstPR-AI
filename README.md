@@ -1,27 +1,35 @@
-# FirstPR AI
+# 🤖 FirstPR AI
 
 **A beginner-friendly AI mentor for open-source contributors.**
 
-FirstPR AI helps contributors understand GitHub issues, explore unfamiliar codebases, plan tests, prepare pull requests, and review potentially risky contribution steps. It provides two ways to use AI:
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Gradio](https://img.shields.io/badge/UI-Gradio-orange?logo=gradio)](https://www.gradio.app/)
+[![Ollama](https://img.shields.io/badge/Local%20AI-Ollama-black)](https://ollama.com/)
+[![CI](https://github.com/prabhtheone/FirstPR-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/prabhtheone/FirstPR-AI/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-- **Local mode:** Gradio + Ollama. Prompts go to the Ollama server configured on your machine; no cloud API key is required.
-- **Hosted mode:** a static website + Vercel serverless API + Groq. Prompts are sent to the configured cloud provider. Do not submit secrets or confidential source code.
+FirstPR AI helps new contributors understand GitHub issues, explore unfamiliar codebases, plan tests, prepare pull requests, and review potentially risky contribution steps.
 
-[Project website](https://firstpr-ai.vercel.app) · [GitHub repository](https://github.com/prabhtheone/FirstPR-AI)
+**Try the hosted app:** [firstpr-ai.vercel.app](https://firstpr-ai.vercel.app)
 
-## Skills
+## ✨ Two ways to use FirstPR AI
 
-| Skill | Purpose |
+- **Local mode:** a Gradio interface powered by Ollama. Prompts are sent to the Ollama server configured on your computer; no cloud AI key is needed.
+- **Hosted mode:** a browser interface served by Vercel with a serverless API that calls Groq. Prompts are sent to the configured cloud provider.
+
+## 🧰 Agent skills
+
+| Skill | What it helps you do |
 | --- | --- |
-| Issue Analyzer | Turn an issue into a clear problem statement and investigation plan. |
-| Codebase Explorer | Plan how to navigate an unfamiliar repository without inventing its structure. |
-| Test Planner | Identify positive, negative, edge, and regression tests. |
-| PR Mentor | Prepare a small, reviewable contribution and an accurate PR description. |
-| Contribution Safety Checker | Review commands and contribution steps for risk and reversibility. |
+| **Issue Analyzer** | Break an issue into a problem statement, requirements, unknowns, and investigation steps. |
+| **Codebase Explorer** | Plan how to navigate an unfamiliar repository and verify where relevant code lives. |
+| **Test Planner** | Identify positive, negative, edge-case, and regression tests. |
+| **PR Mentor** | Prepare a small, reviewable contribution and a clear pull request description. |
+| **Contribution Safety Checker** | Review commands and contribution steps for risk and reversibility. |
 
-The Markdown instructions in `skills/` are the source of truth. Both the local app and hosted API load the same files through `skill_registry.py`; skill guidance is not copied into a second Python dictionary.
+The five Markdown files in `skills/` are the single source of truth. Both the local app and hosted API load them through `skill_registry.py`, so skill instructions are not duplicated across backends.
 
-## Screenshots
+## 🖼️ Screenshots
 
 ![FirstPR AI main interface](screenshots/main-interface.png.png)
 
@@ -29,106 +37,142 @@ The Markdown instructions in `skills/` are the source of truth. Both the local a
 
 ![FirstPR AI settings](screenshots/settings.png.png)
 
-## Run locally
+## 🚀 Run locally
 
-### Requirements
+### Prerequisites
 
 - Python 3.10 or newer
 - [Ollama](https://ollama.com/download)
-- Git
+- [Git](https://git-scm.com/downloads)
 
-### Setup
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/prabhtheone/FirstPR-AI.git
 cd FirstPR-AI
-python -m venv .venv
 ```
 
-Activate the environment:
+### 2. Create and activate a virtual environment
 
 **macOS / Linux**
 ```bash
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
 **Windows PowerShell**
 ```powershell
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Install and start:
+If PowerShell blocks activation, use `.venv\Scripts\python.exe` instead of `python` in the following commands.
+
+### 3. Install dependencies
 
 ```bash
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+### 4. Download the configured model
+
+FirstPR AI's local app currently uses `llama3.2:3b`.
+
+```bash
 ollama pull llama3.2:3b
+```
+
+Make sure Ollama is running. If it is not already running as a background service, start it in a separate terminal:
+
+```bash
+ollama serve
+```
+
+### 5. Start the app
+
+```bash
 python app.py
 ```
 
-Keep Ollama running. Open [http://127.0.0.1:7860](http://127.0.0.1:7860).
+Open [http://127.0.0.1:7860](http://127.0.0.1:7860).
 
-If PowerShell blocks activation, run `.venv\Scripts\python.exe -m pip install -r requirements.txt` and `.venv\Scripts\python.exe app.py` instead.
+## 💡 How to use it
 
-## Hosted mode
+1. Start Ollama and make sure the configured model is available.
+2. Run `python app.py` and open the local Gradio URL.
+3. Select one of the five agent skills.
+4. Paste the relevant GitHub issue or project context.
+5. Ask FirstPR AI for guidance and review its response critically.
+6. Verify suggested files, commands, and technical claims against the real repository before acting.
 
-The hosted website is served from `web/index.html`; requests are handled by `web/api/chat.py`.
+For best results, include an issue title, expected behavior, actual behavior, reproduction steps, and relevant error messages when available.
+
+## ☁️ Hosted deployment configuration
+
+The hosted frontend is `web/index.html`; its API handler is `web/api/chat.py`.
 
 Configure these environment variables in the Vercel project:
 
-- `GROQ_API_KEY` — required secret.
-- `GROQ_MODEL` — optional; defaults to `llama-3.3-70b-versatile`.
+| Variable | Required? | Description |
+| --- | --- | --- |
+| `GROQ_API_KEY` | Yes | Secret API key used by the hosted backend. |
+| `GROQ_MODEL` | No | Groq model name; defaults to `llama-3.3-70b-versatile`. |
 
-Never commit the API key. Cloud mode sends the user's prompt to Groq for processing. Local mode is separate and uses Ollama.
+Add secrets through Vercel Project Settings → Environment Variables. **Never commit API keys to Git.** Hosted mode sends prompts to Groq; local mode uses Ollama independently.
 
-## Project layout
+## 🧪 Run checks
 
-```text
-FirstPR-AI/
-├── app.py                    # Local Gradio application
-├── skill_registry.py         # Shared skill names and Markdown loader
-├── skills/                   # One source of truth for agent instructions
-│   ├── issue-analyzer/
-│   ├── codebase-explorer/
-│   ├── test-planner/
-│   ├── pr-mentor/
-│   └── contribution-safety-checker/
-├── screenshots/               # UI documentation images
-├── web/
-│   ├── index.html            # Hosted website and browser UI
-│   └── api/
-│       └── chat.py           # Hosted Groq API endpoint
-├── tests/
-│   └── test_app.py           # Network-free local regression tests
-├── .github/workflows/ci.yml
-├── requirements.txt
-├── CONTRIBUTING.md
-├── SECURITY.md
-└── LICENSE
-```
-
-## Checks
-
-Run from the repository root:
+From the repository root:
 
 ```bash
 python -m compileall -q app.py skill_registry.py web/api tests
 python -m unittest discover -s tests -v
 ```
 
-The unit tests mock Ollama; they do not require a running model or network access. GitHub Actions runs the syntax check and tests on pushes and pull requests to `main`.
+The regression tests mock the Ollama request and do not require a running model or network access. GitHub Actions runs the syntax check and test suite on pull requests and pushes to `main`.
 
-## Privacy and limitations
+These automated checks validate syntax and selected application behavior. They do not verify the quality of model-generated advice or replace a live end-to-end check of the Ollama and Groq integrations.
+
+## 🗂️ Project structure
+
+```text
+FirstPR-AI/
+├── app.py                    # Local Gradio application
+├── skill_registry.py         # Shared skill registry and Markdown loader
+├── skills/                   # Source-of-truth skill instructions
+│   ├── issue-analyzer/
+│   ├── codebase-explorer/
+│   ├── test-planner/
+│   ├── pr-mentor/
+│   └── contribution-safety-checker/
+├── screenshots/              # README screenshots
+├── web/
+│   ├── index.html             # Hosted browser interface
+│   └── api/
+│       └── chat.py            # Vercel / Groq API handler
+├── tests/
+│   └── test_app.py            # Network-free regression tests
+├── .github/workflows/ci.yml   # GitHub Actions checks
+├── requirements.txt
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
+└── README.md
+```
+
+## 🔐 Privacy and limitations
 
 - Local mode sends prompts to the Ollama endpoint configured in `app.py`.
-- Hosted mode sends prompts to Groq through the Vercel function.
+- Hosted mode sends prompts to Groq through the Vercel API.
+- Do not submit passwords, access tokens, private keys, or confidential project data.
 - AI output can be inaccurate or incomplete. Verify commands, repository paths, and technical claims before acting.
-- Never submit passwords, access tokens, private keys, or confidential project data.
-- FirstPR AI provides guidance; it does not automatically modify repositories or guarantee that a suggested contribution is safe.
+- FirstPR AI provides guidance; it does not automatically modify repositories, guarantee a safe contribution, or replace project maintainers and code review.
 
-## Contributing
+## 🤝 Contributing
 
-Bug reports, documentation improvements, and focused code contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Bug reports, documentation improvements, and focused code contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) before contributing or reporting a security concern.
 
-## License
+## 📄 License
 
 Released under the [MIT License](LICENSE).
