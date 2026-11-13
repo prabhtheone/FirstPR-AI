@@ -21,6 +21,14 @@ FirstPR AI helps contributors understand GitHub issues, explore unfamiliar codeb
 
 The Markdown instructions in `skills/` are the source of truth. Both the local app and hosted API load the same files through `skill_registry.py`; skill guidance is not copied into a second Python dictionary.
 
+## Screenshots
+
+![FirstPR AI main interface](screenshots/main-interface.png.png)
+
+![FirstPR AI skill selector](screenshots/agent-skills.png.png)
+
+![FirstPR AI settings](screenshots/settings.png.png)
+
 ## Run locally
 
 ### Requirements
@@ -84,6 +92,7 @@ FirstPR-AI/
 │   ├── test-planner/
 │   ├── pr-mentor/
 │   └── contribution-safety-checker/
+├── screenshots/               # UI documentation images
 ├── web/
 │   ├── index.html            # Hosted website and browser UI
 │   └── api/
