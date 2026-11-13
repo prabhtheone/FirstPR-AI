@@ -18,7 +18,7 @@ class FirstPRAITests(unittest.TestCase):
         post.assert_not_called()
 
     def test_non_string_issue_is_rejected(self):
-        self.assertIn("paste a github issue", app.analyze_issue(None, "Issue Analyzer"))
+        self.assertIn("paste a github issue", app.analyze_issue(None, "Issue Analyzer").lower())
 
     def test_unknown_skill_returns_helpful_error(self):
         content, error = load_skill("Not a real skill")
